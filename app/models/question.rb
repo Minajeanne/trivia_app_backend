@@ -1,4 +1,5 @@
 class Question < ApplicationRecord
   belongs_to :game
-  validates :answer, presence: true
+  has_many :users, through: :games
+  # validates :answer, presence: true
 end
