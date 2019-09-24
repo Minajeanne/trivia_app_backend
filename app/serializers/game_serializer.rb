@@ -1,6 +1,6 @@
 class GameSerializer
   include FastJsonapi::ObjectSerializer
-  attributes :id
+  attribute :id
 
   attribute :questions do |game|
     game.questions.map do |question|
