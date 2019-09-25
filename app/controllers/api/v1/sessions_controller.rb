@@ -1,5 +1,6 @@
 class Api::V1::SessionsController < ApplicationController
   def create
+    # byebug
     @user = User.find_by(username: params[:session][:username])
 
     if @user && @user.authenticate(params[:session][:password])
