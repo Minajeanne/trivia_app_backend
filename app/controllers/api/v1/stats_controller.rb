@@ -5,8 +5,8 @@ class Api::V1::StatsController < ApplicationController
     User.all.each do |user|
       Stat.create_or_update_user_stats(user)
     end
-   @stats = Stat.all.sort_by{ |s| s.ranking }
-   
+   @stats = Stat.all.sort_by{ |s| s.user_rank }
+
    render json: @stats
  end
 
@@ -21,6 +21,6 @@ class Api::V1::StatsController < ApplicationController
   end
 
   def stat_params
-    params.require(:stat).permit(:user_id, :longest_streak, :correct_overall, :incorrect_overall, :ranking)
+    params.require(:stat).permit(:user_id, :total_correct, :user_pr, :user_rank)
   end
 end
