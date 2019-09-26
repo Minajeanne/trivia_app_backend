@@ -10,8 +10,6 @@ class Api::V1::UsersController < ApplicationController
 
   # GET /users/1
   def show
-    #render json: @user
-    # json_string = MovieSerializer.new(movie).serialized_json
     user_json = UserSerializer.new(@user).serialized_json
     render json: user_json
   end
@@ -19,18 +17,16 @@ class Api::V1::UsersController < ApplicationController
   # POST /users
   def create
     @user = User.new(user_params)
-    # @location =  Location.find_or_create_by(city: params[:user][:hometown][:city], state: params[:user][:hometown][:state], country: params[:user][:hometown][:country])
-
-    # @user.hometown = @location
-    # if @user.save
-    #   session[:user_id] = @user.id
-    #   render json: UserSerializer.new(@user), status: :created
-    # else
-    #   resp = {
-    #     error: @user.errors.full_messages.to_sentence
-    #   }
-    #   render json: resp, status: :unprocessable_entity
-    # end
+  
+    if @user.save
+      session[:user_id] = @user.id
+      render json: UserSerializer.new(@user), status: :created
+    else
+      resp = {
+        error: @user.errors.full_messages.to_sentence
+      }
+      render json: resp, status: :unprocessable_entity
+    end
   end
 
   # PATCH/PUT /users/1
