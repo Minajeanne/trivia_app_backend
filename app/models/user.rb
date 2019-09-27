@@ -5,4 +5,6 @@ class User < ApplicationRecord
   has_many :stats
   has_many :questions, through: :games
 
+  validates :username, presence: true
+  validates :username, uniqueness: true
 end
