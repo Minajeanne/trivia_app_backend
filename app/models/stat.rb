@@ -19,7 +19,7 @@ class Stat < ApplicationRecord
             @stat.save
         end
     else
-        user.stat.update_attributes(user_pr: user_pr.streak_count, total_correct: total_correct, rank: rank)
+        user.stat.update_attributes(user_pr: user_pr, total_correct: total_correct, rank: rank)
     end
   end
 end

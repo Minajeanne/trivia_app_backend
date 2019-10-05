@@ -18,7 +18,7 @@ class Api::V1::UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     @user.build_stat(user: @user)
-    # @user.stat = Stat.new
+
     if @user.save
       session[:user_id] = @user.id
       render json: UserSerializer.new(@user), status: :created
