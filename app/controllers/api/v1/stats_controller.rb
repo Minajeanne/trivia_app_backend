@@ -12,18 +12,16 @@ class Api::V1::StatsController < ApplicationController
  # end
 
   def show
-    @user 
+    @total_correct = @user.stat.total_correct
+    user_pr = @total_correct
 
-    stat_json = StatSerializer.new(@stat).serialized_json
-      binding.pry
-    render json: stat_json
-    # @total_correct = @user.stat.total_correct
-    # user_pr = @total_correct
-    #   if user_pr
-    #     puts "PR"
-    #   else
-    #     puts "ERROR"
-    #   end
+    @user_rank = @user.stat.user_rank
+    user_rank = @user_rank
+
+
+    # stat_json = StatSerializer.new(@stat).serialized_json
+      # binding.pry
+    render json: @total_correct
 
     # render json: @user.stat.total_correct
   end
@@ -40,7 +38,7 @@ class Api::V1::StatsController < ApplicationController
   private
 
   def set_user
-    @user = User.find(params[:user_id])
+    @user = User.find_by(id: params[:id])
   end
 
   def stat_params
