@@ -1,5 +1,6 @@
 class Api::V1::StatsController < ApplicationController
-  before_action :set_user, only: [:show, :update, :destroy]
+  before_action :set_user, only: [:show, :update]
+  # before_action :set_stat, only: [:show, :update]
 
  #  def index
  #    User.all.each do |user|
@@ -12,18 +13,19 @@ class Api::V1::StatsController < ApplicationController
  # end
 
   def show
+      binding.pry
     @total_correct = @user.stat.total_correct
-    user_pr = @total_correct
-
-    @user_rank = @user.stat.user_rank
-    user_rank = @user_rank
-
-
+    # user_pr = @total_correct
+    #
+    # @user_rank = @user.stat.user_rank
+    # user_rank = @user_rank
+    #
     # stat_json = StatSerializer.new(@stat).serialized_json
-      # binding.pry
-    render json: @total_correct
+    #   binding.pry
+    # render json: stat_json
+    # render json: @total_correct
 
-    # render json: @user.stat.total_correct
+    render json: @total_correct
   end
 
   def update
@@ -40,6 +42,10 @@ class Api::V1::StatsController < ApplicationController
   def set_user
     @user = User.find_by(id: params[:id])
   end
+
+  # def set_stat
+  #   @stat = User.find_by(id: params[:id])
+  # end
 
   def stat_params
     params.require(:stat).permit(:user_id, :total_correct, :user_pr, :user_rank, :score, :id)
