@@ -1,4 +1,6 @@
 class StatSerializer
   include FastJsonapi::ObjectSerializer
-    attributes :id, :total_correct, :user_pr, :user_rank
+
+    belongs_to :user, serializer: UserSerializer
+    attributes :id, :total_correct
 end

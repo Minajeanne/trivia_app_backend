@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   get "/api/v1/get_current_user", to: "api/v1/sessions#get_current_user"
   # patch "/api/v1/users/:id", to: "api/v1/users#update"
   # patch "/api/v1/users/:id", to: "api/v1/users#update"
-  get "/api/v1/stats", to: "api/v1/stats#show"
+  get "/api/v1/stats/:id", to: "api/v1/stats#show"
 
   namespace :api do
     namespace :v1 do

@@ -1,31 +1,26 @@
 class Api::V1::StatsController < ApplicationController
-  before_action :set_user, only: [:show, :update]
+  before_action :set_user, only: [:index, :show, :update]
   # before_action :set_stat, only: [:show, :update]
 
- #  def index
- #    User.all.each do |user|
- #      Stat.create_or_update_user_stats(user)
- #
- #    end
- #    @stats = Stat.all.sort_by{ |s| s.user_rank }
- #
- #   render json: @stats
- # end
+  def index
+    binding.pry
+
+    # User.all.each do |user|
+    #   Stat.create_or_update_user_stats(user)
+
+    # end
+    # @stats = Stat.all.sort_by{ |s| s.user_rank }
+    #
+    # render json: @stats
+ end
 
   def show
-      binding.pry
-    @total_correct = @user.stat.total_correct
-    # user_pr = @total_correct
-    #
-    # @user_rank = @user.stat.user_rank
-    # user_rank = @user_rank
-    #
-    # stat_json = StatSerializer.new(@stat).serialized_json
-    #   binding.pry
-    # render json: stat_json
-    # render json: @total_correct
+    @user = User.find_by(id: params[:id])
+      # binding.pry
+      # user_pr = @user.total_correct
 
-    render json: @total_correct
+    render json: @user.stat
+    # render json: @total_correct
   end
 
   def update
@@ -34,7 +29,7 @@ class Api::V1::StatsController < ApplicationController
       if @user.stat.total_correct.nil? || score > @user.stat.total_correct
         @user.stat.update(total_correct: score)
       end
-      render json: @user
+      render json: @user.stat
   end
 
   private
