@@ -11,7 +11,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :questions
       resources :games
-      resources :stats, only: [:show, :update]
+      resources :stats, only: [:index, :show, :update]
       resources :users
     end
   end

@@ -3,28 +3,25 @@ class Api::V1::StatsController < ApplicationController
   # before_action :set_stat, only: [:show, :update]
 
   def index
-    binding.pry
+    @stats = Stat.all
 
-    # User.all.each do |user|
-    #   Stat.create_or_update_user_stats(user)
+    @users_rankings = User.all.each do |user|
+      Stat.create_or_update_user_rank(user)
+      binding.pry
+    end
 
-    # end
-    # @stats = Stat.all.sort_by{ |s| s.user_rank }
-    #
-    # render json: @stats
+    render json: @users_rankings
  end
 
   def show
     @user = User.find_by(id: params[:id])
-      # binding.pry
-      # user_pr = @user.total_correct
 
     render json: @user.stat
-    # render json: @total_correct
   end
 
   def update
       score = params[:score]
+      high_score = user.stat.total_correct
       @user = User.find_by(id: params[:id])
       if @user.stat.total_correct.nil? || score > @user.stat.total_correct
         @user.stat.update(total_correct: score)
@@ -38,11 +35,7 @@ class Api::V1::StatsController < ApplicationController
     @user = User.find_by(id: params[:id])
   end
 
-  # def set_stat
-  #   @stat = User.find_by(id: params[:id])
-  # end
-
   def stat_params
-    params.require(:stat).permit(:user_id, :total_correct, :user_pr, :user_rank, :score, :id)
+    params.require(:stat).permit(:user_id, :total_correct, :user_rank, :score, :id)
   end
 end
