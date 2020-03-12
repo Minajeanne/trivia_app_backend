@@ -2,7 +2,8 @@ class Stat < ApplicationRecord
   belongs_to :user
 
   def self.create_or_update_user_rank
-    assign_rank = Stat.all.sort_by { |s| s[:user_pr] }.reverse
+    
+      assign_rank = Stat.all.sort_by { |s| s[:total_correct] }.reverse
 
       assign_rank.each_with_index do |stat, index|
         user_rank = index + 1

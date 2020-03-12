@@ -18,13 +18,20 @@ class Api::V1::StatsController < ApplicationController
   end
 
   def update
-      score = params[:score]
-      high_score = user.stat.total_correct
-      @user = User.find_by(id: params[:id])
-      if @user.stat.total_correct.nil? || score > @user.stat.total_correct
-        @user.stat.update(total_correct: score, user_pr: high_score)
-      end
-      render json: @user.stat
+    score = params[:score]
+    high_score = @user.stat.total_correct
+    ranking = params[:user_rank]
+    @user = User.find_by(id: params[:id])
+
+    if @user.stat.user_rank.nil? || ranking > @user.stat.user_rank
+      Stat.create_or_update_user_rank
+    end
+
+    if @user.stat.total_correct.nil? || score > @user.stat.total_correct
+      @user.stat.update(total_correct: score, user_pr: high_score)
+    end
+    
+    render json: @user.stat
   end
 
   private
