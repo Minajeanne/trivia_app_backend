@@ -6,7 +6,7 @@ class Api::V1::StatsController < ApplicationController
     @users_rankings = Stat.create_or_update_user_rank
 
     render json: @users_rankings.as_json(
-      only: [:total_correct, :user_pr, :user_rank],
+      only: [:user_id, :total_correct, :user_pr, :user_rank],
       include: { user: { only: [:username] } }
     )
  end
