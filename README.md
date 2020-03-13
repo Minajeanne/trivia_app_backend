@@ -1,24 +1,10 @@
-# README
+# TRIVIA App #
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+** Want to test your trivia skills? Play a round at <Heroku link coming soon!> **
 
-Things you may want to cover:
+** Rails API **
 
-* Ruby version
+* MVC structure *
+* Fast JSON API https://github.com/Netflix/fast_jsonapi *
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* Frontend found at https://github.com/Minajeanne/trivia_app_frontend *
