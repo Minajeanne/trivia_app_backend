@@ -4,7 +4,7 @@ class Api::V1::StatsController < ApplicationController
   def index
     @stats = Stat.all
     @users_rankings = Stat.create_or_update_user_rank
-
+# binding.pry
     render json: @users_rankings.as_json(
       only: [:user_id, :total_correct, :user_pr, :user_rank],
       include: { user: { only: [:username] } }
@@ -30,7 +30,7 @@ class Api::V1::StatsController < ApplicationController
     if @user.stat.total_correct.nil? || score > @user.stat.total_correct
       @user.stat.update(total_correct: score, user_pr: high_score)
     end
-    
+
     render json: @user.stat
   end
 
