@@ -1,14 +1,15 @@
 Rails.application.routes.draw do
   post "/api/v1/login", to: "api/v1/sessions#create"
   post "/api/v1/signup", to: "api/v1/users#create"
+  post "api/v1/stats", to: "api/v1/stats#index"
   delete "/api/v1/logout", to: "api/v1/sessions#destroy"
   get "/api/v1/get_current_user", to: "api/v1/sessions#get_current_user"
   get "/api/v1/stats/:id", to: "api/v1/stats#show"
 
+
   namespace :api do
     namespace :v1 do
       resources :questions
-      resources :games
       resources :stats, only: [:index, :show, :update]
       resources :users
     end
